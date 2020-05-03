@@ -8,6 +8,7 @@ import LandingPage from "./LandingPage";
 import MainPage from "./MainPage";
 import Footer from "./Footer";
 import SignUpPage from "./SignUpPage";
+import RegistrationPage from "./RegistrationPage";
 import ErrorPage from "./ErrorPage";
 import GlobalStyles from "./GlobalStyles";
 function App() {
@@ -40,6 +41,9 @@ function App() {
             </Route>
             <Route path="/user">
               <SignUpPage />
+            </Route>
+            <Route path="/register">
+              <RegistrationPage />
             </Route>
           </Switch>
           <div>

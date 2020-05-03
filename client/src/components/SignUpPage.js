@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 function SignUpPage() {
@@ -15,7 +15,9 @@ function SignUpPage() {
             Answer a few questions to help us get to know you!{" "}
           </div>
           <div className="container">
-            <button className="signup">Sign Up</button>
+            <Link to="/register">
+              <button className="signup">Sign Up</button>
+            </Link>
           </div>
         </BlackBackground>
         <WhiteBackground>
@@ -25,18 +27,24 @@ function SignUpPage() {
             Sign in below and join the millions using this app!
           </div>
           <form>
-            <input
-              type="text"
-              value={email}
-              placeholder="Email"
-              onChange={(ev) => setEmail(ev.target.value)}
-            ></input>
-            <input
-              type="text"
-              value={password}
-              placeholder="Password"
-              onChange={(ev) => setPassword(ev.target.value)}
-            ></input>
+            <div className="inputContainer">
+              <div>Email</div>
+              <input
+                type="text"
+                className="email"
+                value={email}
+                placeholder="Email"
+                onChange={(ev) => setEmail(ev.target.value)}
+              ></input>
+              <div>Password</div>
+              <input
+                type="text"
+                className="password"
+                value={password}
+                placeholder="Password"
+                onChange={(ev) => setPassword(ev.target.value)}
+              ></input>
+            </div>
             <div>
               <button
                 className="signin"
@@ -44,7 +52,7 @@ function SignUpPage() {
                 form="signin-form"
                 onClick={(ev) => {
                   ev.preventDefault();
-                  fetch("/getuser", {
+                  fetch("/user", {
                     method: "POST",
                     headers: {
                       "Content-Type": "application/json",
@@ -91,7 +99,7 @@ const BlackBackground = styled.div`
   }
   .movement {
     text-align: center;
-    height: 122px;
+    height: 69px;
     left: 48px;
     top: 211px;
     font-size: 36px;
@@ -100,7 +108,7 @@ const BlackBackground = styled.div`
     text-shadow: 0px 2px 7px #000000;
   }
   .details {
-    height: 234px;
+    height: 205px;
     left: 98px;
     top: 311px;
     font-style: normal;
@@ -111,13 +119,14 @@ const BlackBackground = styled.div`
     text-shadow: 0px 2px 7px #000000;
   }
   .container {
-    padding-left: 176px;
+    background-color: white;
+    padding: 15px 0px;
+    width: 40%;
+    margin-left: 150px;
+    border-radius: 15px;
   }
   .signup {
-    height: 101px;
-    left: 124px;
-    top: 466px;
-    padding: 45px;
+    padding: 25px 50px;
     background-color: #c4c4c4;
     font-size: 24px;
     border-radius: 12px;
@@ -140,15 +149,37 @@ const WhiteBackground = styled.div`
   .account {
     font-size: 36px;
     line-height: 42px;
-    height: 160px;
+    height: 69px;
   }
   .description {
     height: 172px;
     font-size: 36px;
     line-height: 42px;
   }
+  .inputContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 175px;
+    width: 50%;
+  }
+  .email {
+    padding: 15px 15px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 13px;
+    width: 100%;
+  }
+  .password {
+    padding: 15px 15px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 13px;
+    width: 100%;
+  }
   .signin {
-    padding: 45px;
+    padding: 25px 50px;
     background-color: #c4c4c4;
     font-size: 24px;
     border-radius: 12px;

@@ -24,7 +24,7 @@ function CategoryPage() {
       .catch((err) => {
         dispatch(receiveArticlesByCategoryError(err));
       });
-  }, []);
+  }, [category]);
   return (
     <BackDrop>
       <NavBar />
