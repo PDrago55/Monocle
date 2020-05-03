@@ -9,11 +9,13 @@ import {
   receiveArticlesByCategory,
   receiveArticlesByCategoryError,
 } from "../actions";
+import { LinearProgress } from "@material-ui/core";
+
 function CategoryPage() {
   const dispatch = useDispatch();
   const categoryArticles = useSelector((state) => state.category.category);
+  const state = useSelector((state) => state.category.status);
   const { category } = useParams();
-  console.log(categoryArticles);
   useEffect(() => {
     dispatch(requestArticlesByCategory());
     fetch(`/category/${category}`)
@@ -27,21 +29,27 @@ function CategoryPage() {
   }, [category]);
   return (
     <BackDrop>
-      <NavBar />
-      <h1>{`Headlines from ${category.toUpperCase()}`}</h1>
-      <CategoryWrapper>
-        {categoryArticles.map((article) => {
-          return (
-            <ArticleWrapper>
-              <div>News Agency: {article.source.name}</div>
-              <ArticleImage src={article.urlToImage}></ArticleImage>
-              <div>{article.title}</div>
-              <div>Author: {article.author}</div>
-              <div>{article.content}</div>
-            </ArticleWrapper>
-          );
-        })}
-      </CategoryWrapper>
+      {state === "loading" ? (
+        <LinearProgress />
+      ) : (
+        <>
+          <NavBar />
+          <h1>{`Headlines from ${category.toUpperCase()}`}</h1>
+          <CategoryWrapper>
+            {categoryArticles.map((article) => {
+              return (
+                <ArticleWrapper>
+                  <div>News Agency: {article.source.name}</div>
+                  <ArticleImage src={article.urlToImage}></ArticleImage>
+                  <div>{article.title}</div>
+                  <div>Author: {article.author}</div>
+                  <div>{article.content}</div>
+                </ArticleWrapper>
+              );
+            })}
+          </CategoryWrapper>
+        </>
+      )}
     </BackDrop>
   );
 }

@@ -17,7 +17,7 @@ const Wrapper = styled.header`
   justify-content: space-between;
   position: relative;
   align-items: center;
-  background-color: #ffffff;
+  background: linear-gradient(to right, #304352, #d7d2cc);
 `;
 
 const Tittle = styled.div`

@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 function RegistrationPage() {
   const [email, setEmail] = useState("");
-  const [password, setPassord] = useState("");
+  const [passwordOne, setPassword] = useState("");
   const [passwordTwo, setPassordTwo] = useState("");
   const [name, setName] = useState("");
   const [leaning, setLeaning] = useState("");
@@ -12,9 +12,9 @@ function RegistrationPage() {
     <Bg>
       <RegisterTitle>Registration</RegisterTitle>
       <Container>
-        <div>Hello!</div>
         <form>
           <div className="holder">
+            <div className="space">What's your Name?</div>
             <input
               type="text"
               className="name"
@@ -22,20 +22,23 @@ function RegistrationPage() {
               placeholder="Name"
               onChange={(ev) => setName(ev.target.value)}
             ></input>
+            <div>Email</div>
             <input
               type="text"
               className="email"
               value={email}
-              placeholder="email"
+              placeholder="Email"
               onChange={(ev) => setEmail(ev.target.value)}
             ></input>
+            <div>Password</div>
             <input
               type="text"
               className="password"
-              value={password}
+              value={passwordOne}
               placeholder="password"
-              onChange={(ev) => setPassord(ev.target.vale)}
+              onChange={(ev) => setPassword(ev.target.value)}
             ></input>
+            <div>Password</div>
             <input
               type="text"
               className="password2"
@@ -43,6 +46,7 @@ function RegistrationPage() {
               placeholder="password"
               onChange={(ev) => setPassordTwo(ev.target.value)}
             ></input>
+            <div>What's your Political Leaning?</div>
             <input
               type="text"
               className="leaning"
@@ -50,7 +54,31 @@ function RegistrationPage() {
               placeholder="Political Leaning"
               onChange={(ev) => setLeaning(ev.target.value)}
             ></input>
-            <button className="button">Register</button>
+            <button
+              className="button"
+              type="submit"
+              form="signup-form"
+              onClick={(ev) => {
+                ev.preventDefault();
+                fetch("/register", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    name: name,
+                    email: email,
+                    password: passwordOne,
+                    password2: passwordTwo,
+                    politicalLeaning: leaning,
+                  }),
+                })
+                  .then((res) => res.json())
+                  .then((data) => console.log(data));
+              }}
+            >
+              Register
+            </button>
           </div>
         </form>
       </Container>
@@ -71,22 +99,25 @@ const RegisterTitle = styled.div`
   position: relative;
   color: white;
   text-align: center;
-  top: 55px;
+  top: 25px;
   font-size: 50px;
 `;
 
 const Container = styled.div`
   position: relative;
   width: 400px;
-  height: 500px;
+  height: 600px;
   background-color: #ffffff78;
-  top: 100px;
+  top: 50px;
   margin-left: 515px;
   .holder {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+  }
+  .space {
+    margin-top: 10px;
   }
   .name {
     padding: 15px 15px;

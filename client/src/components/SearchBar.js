@@ -66,6 +66,7 @@ function SearchBar() {
           <ListWrapper>
             {Object.values(matches).map((article, index) => {
               let theSelection = selected === index;
+              console.log(article);
               return (
                 <List
                   style={{
@@ -74,7 +75,7 @@ function SearchBar() {
                   }}
                   key={article.source}
                 >
-                  {article.title} <strong>{article.author}</strong>
+                  {article.title}
                 </List>
               );
             })}

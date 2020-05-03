@@ -58,6 +58,7 @@ express()
 
   //--------------------User Endpoints-------------------//
   .post("/register", async (req, res) => {
+    console.log(req.body);
     const client = new MongoClient("mongodb://localhost:27017", {
       useUnifiedTopology: true,
     });
@@ -69,6 +70,7 @@ express()
         return res.status(200).json(errors);
       }
       let newUser = [];
+      console.log(req.body);
       await db
         .collection("userRegister")
         .findOne({ email: req.body.email })
@@ -86,18 +88,18 @@ express()
             db.collection("userRegister").insertOne(newUser);
             res.status(200).json(newUser);
           }
-          bcrypt.genSalt(10, async (err, salt) => {
-            await bcrypt.hash(newUser.password, salt, (err, hash) => {
-              if (err) {
-                throw err;
-              }
-              newUser.password = hash;
-              newUser
-                .save()
-                .then((user) => res.json(user))
-                .catch((err) => console.log(err));
-            });
-          });
+          // bcrypt.genSalt(10, async (err, salt) => {
+          //   await bcrypt.hash(newUser.password, salt, (err, hash) => {
+          //     if (err) {
+          //       throw err;
+          //     }
+          //     newUser.password = hash;
+          //     newUser
+          //       .save()
+          //       .then((user) => res.json(user))
+          //       .catch((err) => console.log(err));
+          //   });
+          // });
         });
     } catch (err) {
       console.log(err);
@@ -136,8 +138,9 @@ express()
                 expiresIn: 31556926,
               },
               (err, token) => {
-                res.json({
+                res.status(200).json({
                   success: true,
+                  signin: email,
                   token: "Bearer " + token,
                 });
               }

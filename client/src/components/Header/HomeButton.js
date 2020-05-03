@@ -6,14 +6,17 @@ const HomeButton = () => {
   return (
     <ImageContainer>
       <Link to="/">
-        <img src="/assets/logo.png" alt="logo" width="80px" height="80px"></img>
+        <img
+          src="/assets/pandamonocle.png"
+          alt="logo"
+          width="80px"
+          height="80px"
+        ></img>
       </Link>
       <div></div>
       <div></div>
     </ImageContainer>
   );
 };
-const ImageContainer = styled.div`
-  background-color: #ffffff;
-`;
+const ImageContainer = styled.div``;
 export default HomeButton;

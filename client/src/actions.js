@@ -42,3 +42,18 @@ export const receiveArticlesByCategory = (category) => ({
 export const receiveArticlesByCategoryError = () => ({
   type: "RECEIVE_ARTICLES_BY_CATEGORIES_ERROR",
 });
+
+//--------------REVEICE CURRENT USER---------------//
+
+export const requestCurrentUser = () => ({
+  type: "REQUEST_CURRENT_USER",
+});
+
+export const receiveCurrentUser = (user) => ({
+  type: "RECEIVE_CURRENT_USER",
+  user,
+});
+
+export const receiveCurrentUserError = () => ({
+  type: "RECEIVE_CURRENT_USER_ERROR",
+});

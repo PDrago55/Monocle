@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function SignUpPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  console.log(email, password);
   return (
     <>
       <Container>
@@ -58,10 +58,12 @@ function SignUpPage() {
                       "Content-Type": "application/json",
                     },
                     body: JSON.stringify({
-                      email,
-                      password,
+                      email: email,
+                      password: password,
                     }),
-                  });
+                  })
+                    .then((res) => res.json())
+                    .then((data) => console.log(data));
                 }}
               >
                 Sign In

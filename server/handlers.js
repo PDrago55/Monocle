@@ -99,7 +99,7 @@ const handleTitles = async (req, res) => {
 
 const getMyArticle = (req, res) => {
   const { title } = req.params;
-  let refreshedTitle = title.split("-").join(" ").toLowerCase();
+  let refreshedTitle = title.split("_").join(" ").toLowerCase();
   newsapi.v2
     .everything({
       q: refreshedTitle,
