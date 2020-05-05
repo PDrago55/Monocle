@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import SearchBar from "./SearchBar";
 import NavBar from "./NavBar";
 import {
@@ -39,11 +40,16 @@ function CategoryPage() {
             {categoryArticles.map((article) => {
               return (
                 <ArticleWrapper>
-                  <div>News Agency: {article.source.name}</div>
-                  <ArticleImage src={article.urlToImage}></ArticleImage>
-                  <div>{article.title}</div>
-                  <div>Author: {article.author}</div>
-                  <div>{article.content}</div>
+                  <ArticleLink
+                    to={`/article/${article.title.split(" ").join("_")}`}
+                  >
+                    <div>News Agency: {article.source.name}</div>
+                    <ArticleImage src={article.urlToImage}></ArticleImage>
+                    <div>{article.title}</div>
+                    <div>Author: {article.author}</div>
+                    <div className="articleD">Article Description</div>
+                    <div>{article.description}</div>
+                  </ArticleLink>
                 </ArticleWrapper>
               );
             })}
@@ -59,6 +65,11 @@ const CategoryWrapper = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-gap: 30px;
   margin: 32px 0;
+  text-decoration: none;
+`;
+const ArticleLink = styled(Link)`
+  text-decoration: none;
+  color: black;
 `;
 
 const ArticleWrapper = styled.div`
@@ -66,6 +77,16 @@ const ArticleWrapper = styled.div`
   border-radius: 16px;
   box-shadow: 2px 5px 36px rgba(0, 0, 0, 0.1);
   text-align: center;
+
+  &:hover {
+    transform: scale(1.05);
+    transform-origin: center;
+  }
+  .articleD {
+    text-align: center;
+    text-decoration: underline;
+    font-weight: bold;
+  }
 `;
 
 const BackDrop = styled.div`

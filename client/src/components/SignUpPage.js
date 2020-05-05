@@ -1,7 +1,14 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import {
+  requestCurrentUser,
+  receiveCurrentUser,
+  receiveCurrentUserError,
+} from "../actions";
+import { useDispatch } from "react-redux";
 function SignUpPage() {
+  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   console.log(email, password);
@@ -38,7 +45,7 @@ function SignUpPage() {
               ></input>
               <div>Password</div>
               <input
-                type="text"
+                type="password"
                 className="password"
                 value={password}
                 placeholder="Password"
@@ -52,6 +59,7 @@ function SignUpPage() {
                 form="signin-form"
                 onClick={(ev) => {
                   ev.preventDefault();
+                  dispatch(requestCurrentUser());
                   fetch("/user", {
                     method: "POST",
                     headers: {
@@ -63,7 +71,13 @@ function SignUpPage() {
                     }),
                   })
                     .then((res) => res.json())
-                    .then((data) => console.log(data));
+                    .then((data) => {
+                      dispatch(receiveCurrentUser(data));
+                      console.log(data);
+                    })
+                    .catch((err) => {
+                      dispatch(receiveCurrentUserError(err));
+                    });
                 }}
               >
                 Sign In

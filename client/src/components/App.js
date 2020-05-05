@@ -6,11 +6,13 @@ import Header from "./Header/Header";
 import CategoryPage from "./CategoryPage";
 import LandingPage from "./LandingPage";
 import MainPage from "./MainPage";
+import About from "./About";
 import Footer from "./Footer";
 import SignUpPage from "./SignUpPage";
 import RegistrationPage from "./RegistrationPage";
 import ErrorPage from "./ErrorPage";
 import GlobalStyles from "./GlobalStyles";
+import AccountInfo from "./AccountInfo";
 function App() {
   const isError = useSelector((state) => {
     return Object.keys(state)
@@ -33,6 +35,9 @@ function App() {
             <Route exact path="/">
               <LandingPage />
             </Route>
+            <Route path="/about">
+              <About />
+            </Route>
             <Route path="/article/:title">
               <MainPage />
             </Route>
@@ -44,6 +49,9 @@ function App() {
             </Route>
             <Route path="/register">
               <RegistrationPage />
+            </Route>
+            <Route path="/account">
+              <AccountInfo />
             </Route>
           </Switch>
           <div>

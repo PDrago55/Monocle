@@ -1,5 +1,6 @@
 const initialState = {
   user: {},
+  isSignedIn: false,
   status: "idle",
 };
 
@@ -14,6 +15,7 @@ export default function userReducer(state = initialState, action) {
       return {
         ...state,
         user: action.user,
+        isSignedIn: true,
         status: "idle",
       };
     case "RECEIVE_CURRENT_USER_ERROR":

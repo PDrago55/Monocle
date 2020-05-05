@@ -2,12 +2,27 @@ import React from "react";
 import styled from "styled-components";
 import HomeButton from "./HomeButton";
 import SignUpIcon from "./SignUpIcon";
+import SingInUser from "./SignInUser";
+import { useSelector } from "react-redux";
 function Header() {
+  const user = useSelector((state) => state.user.user);
+  const isOn = useSelector((state) => state.user.isSignedIn);
+  console.log("user", user, "ON", isOn);
   return (
     <Wrapper>
-      <HomeButton />
-      <Tittle>Monocle</Tittle>
-      <SignUpIcon />
+      {isOn ? (
+        <>
+          <HomeButton />
+          <Tittle>Monocle</Tittle>
+          <SingInUser />
+        </>
+      ) : (
+        <>
+          <HomeButton />
+          <Tittle>Monocle</Tittle>
+          <SignUpIcon />
+        </>
+      )}
     </Wrapper>
   );
 }

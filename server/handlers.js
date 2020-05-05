@@ -85,7 +85,7 @@ const handleTitles = async (req, res) => {
       })
       .then(async (data) => {
         let titleArray = data.articles.map((article) => {
-          return { title: article.title.split(" ").join("-") };
+          return { title: article.title };
         });
         await db.collection("articleTitles").insertMany(titleArray);
         res.json(titleArray);
@@ -127,7 +127,7 @@ const handleCategories = (req, res) => {
       category: category,
       language: "en",
       country: "us",
-      pageSize: 20,
+      pageSize: 10,
     })
     .then((data) => res.json(data));
 };

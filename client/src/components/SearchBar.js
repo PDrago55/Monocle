@@ -9,7 +9,6 @@ function SearchBar() {
   const [value, setValue] = useState("");
   const [selected, setSelected] = useState(0);
   const allArticles = useSelector((state) => state.titles.titles);
-
   useEffect(() => {
     dispatch(requestTitle());
     fetch("/titles")
@@ -29,51 +28,61 @@ function SearchBar() {
     }
     return showCase && limit;
   });
+
+  const handleValue = (event) => {
+    console.log(event);
+    // event.preventDefault();
+    setValue(event);
+  };
   return (
     <Wrapper>
       <Container>
-        <Search
-          type="text"
-          value={value}
-          placeholder="Find an Article"
-          onChange={(ev) => setValue(ev.target.value)}
-          onKeyDown={(ev) => {
-            switch (ev.key) {
-              case "Enter": {
-                setValue(ev.target.value);
-                return;
+        <div className="searchContainer">
+          <Search
+            type="text"
+            value={value}
+            placeholder="Find an Article"
+            onChange={(ev) => setValue(ev.target.value)}
+            onKeyDown={(ev) => {
+              switch (ev.key) {
+                case "Enter": {
+                  ev.preventDefault();
+                  handleValue(value);
+                  return;
+                }
+                case "ArrowUp": {
+                  ev.preventDefault();
+                  if (selected > 0) setSelected(selected - 1);
+                  break;
+                }
+                case "ArrowDown": {
+                  ev.preventDefault();
+                  if (selected < matches.length - 1) setSelected(selected + 1);
+                  break;
+                }
+                default: {
+                  return;
+                }
               }
-              case "ArrowUp": {
-                ev.preventDefault();
-                if (selected > 0) setSelected(selected - 1);
-                break;
-              }
-              case "ArrowDown": {
-                ev.preventDefault();
-                if (selected < matches.length - 1) setSelected(selected + 1);
-                break;
-              }
-              default: {
-                return;
-              }
-            }
-          }}
-        ></Search>
-        <Link to={`/article/${value}`}>
-          <Button onClick={() => setValue(value)}>Search for Truth</Button>
-        </Link>
+            }}
+          ></Search>
+          <Link to={`/article/${value.split(" ").join("_")}`}>
+            <Button onClick={() => setValue(value)}>Search for Truth</Button>
+          </Link>
+        </div>
         {matches.length > 0 ? (
           <ListWrapper>
             {Object.values(matches).map((article, index) => {
               let theSelection = selected === index;
-              console.log(article);
               return (
                 <List
+                  onClick={() => handleValue(article.title)}
                   style={{
                     background: theSelection ? "gray" : "white",
                     color: theSelection ? "white" : "black",
                   }}
-                  key={article.source}
+                  test={article.title}
+                  key={index}
                 >
                   {article.title}
                 </List>
@@ -94,17 +103,21 @@ const Wrapper = styled.div`
 `;
 
 const Container = styled.div`
-  width: 400px;
+  width: 550px;
   background-color: white;
-  height: 96px;
+  opacity: 0.9;
+  height: 110px;
   margin-top: 291px;
   margin-left: 480px;
   border-radius: 10px;
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding: 0px 10px;
-  padding-top: 25px;
+  padding: 49px 10px 10px 0px;
+  .searchContainer {
+    display: flex;
+    flex-direction: row;
+  }
 `;
 
 const Search = styled.input`
@@ -116,7 +129,8 @@ const Search = styled.input`
   font-size: 18px;
 `;
 const Button = styled.button`
-  height: 40px;
+  height: 45px;
+  width: max-content;
   background: #2b00d7;
   border-radius: 4px;
   border: none;
@@ -128,6 +142,8 @@ const ListWrapper = styled.ul`
   text-decoration: none;
   list-style-type: none;
   background: #ffffff;
+  padding: 0px;
+  margin-right: 17px;
 `;
 
 const List = styled.li`
