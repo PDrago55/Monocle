@@ -58,7 +58,6 @@ express()
 
   //--------------------User Endpoints-------------------//
   .post("/register", async (req, res) => {
-    console.log(req.body);
     const client = new MongoClient("mongodb://localhost:27017", {
       useUnifiedTopology: true,
     });
@@ -84,6 +83,7 @@ express()
               password: req.body.password,
               password2: req.body.password2,
               politicalLeaning: req.body.politicalLeaning,
+              article: [],
             });
             db.collection("userRegister").insertOne(newUser);
             res.status(200).json(newUser);
@@ -119,6 +119,7 @@ express()
       }
       const email = req.body.email;
       const password = req.body.password;
+      const name = req.body.name;
       await db
         .collection("userRegister")
         .findOne({ email })
@@ -141,6 +142,7 @@ express()
                 res.status(200).json({
                   success: true,
                   signin: email,
+                  name: name,
                   token: "Bearer " + token,
                 });
               }
@@ -150,6 +152,68 @@ express()
               .status(400)
               .json({ passwordincorrect: "Password incorrect" });
           }
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  })
+
+  .post("/savedarticle", async (req, res) => {
+    const client = new MongoClient("mongodb://localhost:27017", {
+      useUnifiedTopology: true,
+    });
+    let test = [];
+    const email = req.body.email;
+    const article = req.body.article;
+    console.log(req.body.article);
+    try {
+      await client.connect();
+      const db = await client.db("monocleDb");
+      await db
+        .collection("userRegister")
+        .findOne({ email })
+        .then((user) => {
+          if (!user) {
+            res.status(400).json({ error: "Error line 180 BE" });
+          } else {
+            test = {
+              source: req.body.article.source,
+              author: req.body.article.author,
+              title: req.body.article.title,
+              description: req.body.article.description,
+              url: req.body.article.url,
+              image: req.body.article.urlToImage,
+              email: req.body.article.email,
+            };
+            console.log("here!!", test);
+            db.collection("userRegister").updateOne(
+              { email },
+              {
+                $push: { article: test },
+              }
+            );
+            res.status(200).json({ test });
+          }
+        });
+    } catch (err) {
+      console.log("Error-savedArticle", err);
+    }
+  })
+
+  .get("/myarticle/:email", async (req, res) => {
+    const client = new MongoClient("mongodb://localhost:27017", {
+      useUnifiedTopology: true,
+    });
+    const { email } = req.params;
+    console.log(email);
+    try {
+      client.connect();
+      const db = await client.db("monocleDb");
+      await db
+        .collection("userRegister")
+        .findOne({ email })
+        .then((data) => {
+          res.status(200).json(data);
         });
     } catch (err) {
       console.log(err);

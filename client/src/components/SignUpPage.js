@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import {
   requestCurrentUser,
   receiveCurrentUser,
@@ -8,6 +8,7 @@ import {
 } from "../actions";
 import { useDispatch } from "react-redux";
 function SignUpPage() {
+  const history = useHistory();
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -74,6 +75,7 @@ function SignUpPage() {
                     .then((data) => {
                       dispatch(receiveCurrentUser(data));
                       console.log(data);
+                      history.push("/");
                     })
                     .catch((err) => {
                       dispatch(receiveCurrentUserError(err));

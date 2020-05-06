@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 function Header() {
   const user = useSelector((state) => state.user.user);
   const isOn = useSelector((state) => state.user.isSignedIn);
-  console.log("user", user, "ON", isOn);
   return (
     <Wrapper>
       {isOn ? (

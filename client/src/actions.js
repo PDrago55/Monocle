@@ -57,3 +57,18 @@ export const receiveCurrentUser = (user) => ({
 export const receiveCurrentUserError = () => ({
   type: "RECEIVE_CURRENT_USER_ERROR",
 });
+
+//--------------RECEIVE SAVED ARTICLE-----------------//
+
+export const requestSavedArticle = () => ({
+  type: "REQUEST_SAVED_ARTICLE",
+});
+
+export const receiveSavedArticle = (saved) => ({
+  type: "RECEIVE_SAVED_ARTICLE",
+  saved,
+});
+
+export const receiveSavedArticleError = () => ({
+  type: "RECEIVE_SAVED_ARTICLE_ERROR",
+});

@@ -6,6 +6,7 @@ import {
   requestArticle,
   receiveArticle,
   receiveArticleError,
+  receiveSavedArticle,
 } from "../actions";
 import { LinearProgress } from "@material-ui/core";
 import NavBar from "./NavBar";
@@ -20,6 +21,7 @@ function MainPage() {
   const dispatch = useDispatch();
   const myArticle = useSelector((state) => state.article.article);
   const state = useSelector((state) => state.article.status);
+  const isOn = useSelector((state) => state.user.isSignedIn);
   const article = useParams();
   useEffect(() => {
     dispatch(requestArticle());
@@ -34,6 +36,23 @@ function MainPage() {
   }, []);
   // console.log(myArticle);
   // console.log("here", article.title.split("-").join(" "));
+
+  const handleSavedArticle = (article) => {
+    fetch("/savedarticle", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        article,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <Balance>
       {state === "loading" ? (
@@ -68,26 +87,35 @@ function MainPage() {
                       <div>Agree</div>
                       <div>Disagree</div>
                     </div>
-                    <div className="IconContainer">
-                      <Icon
-                        className="up"
-                        onClick={() => console.log("UPVOTE")}
-                        icon={circle_up}
-                        size={45}
-                      ></Icon>
-                      <Icon
-                        className="heart"
-                        icon={heart}
-                        size={45}
-                        onClick={() => console.log("love/save")}
-                      ></Icon>
-                      <Icon
-                        className="down"
-                        onClick={() => console.log("DownVOTE")}
-                        icon={circle_down}
-                        size={45}
-                      ></Icon>
-                    </div>
+                    {isOn ? (
+                      <div className="IconContainer">
+                        <form>
+                          <Icon
+                            className="up"
+                            onClick={() => console.log("UPVOTE")}
+                            icon={circle_up}
+                            size={45}
+                          ></Icon>
+                          <Icon
+                            className="heart"
+                            icon={heart}
+                            size={45}
+                            onClick={() => {
+                              handleSavedArticle(item);
+                              dispatch(receiveSavedArticle(item));
+                            }}
+                          ></Icon>
+                          <Icon
+                            className="down"
+                            onClick={() => console.log("DownVOTE")}
+                            icon={circle_down}
+                            size={45}
+                          ></Icon>
+                        </form>
+                      </div>
+                    ) : (
+                      <div> Please Sign in to use these Features</div>
+                    )}
                   </Container>
                 );
               }
