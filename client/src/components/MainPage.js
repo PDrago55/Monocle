@@ -67,7 +67,9 @@ function MainPage() {
           <Space></Space>
           <ArticleCard>
             <ImgContainer>
-              <img src="/assets/info.png" height="60px" width="60px"></img>
+              <Link to="/about">
+                <img src="/assets/info.png" height="60px" width="60px"></img>
+              </Link>
             </ImgContainer>
             {Object.values(categoryLink).map((item) => {
               return (
@@ -113,7 +115,11 @@ function MainPage() {
                       ></Icon>
                     </div>
                   ) : (
-                    <div> Please Sign in to use these Features</div>
+                    <PleaseHold>
+                      <StyledLink to="/user">
+                        <Please> Please Sign in to use these Features</Please>
+                      </StyledLink>
+                    </PleaseHold>
                   )}
                 </Container>
               );
@@ -126,7 +132,9 @@ function MainPage() {
           <Space></Space>
           <ArticleCard>
             <ImgContainer>
-              <img src="/assets/info.png" height="60px" width="60px"></img>
+              <Link to="/about">
+                <img src="/assets/info.png" height="60px" width="60px"></img>
+              </Link>
             </ImgContainer>
             {myArticle.map((item) => {
               console.log("ITEMArticle", item);
@@ -175,7 +183,11 @@ function MainPage() {
                       ></Icon>
                     </div>
                   ) : (
-                    <div> Please Sign in to use these Features</div>
+                    <PleaseHold>
+                      <StyledLink to="/user">
+                        <Please> Please Sign in to use these Features</Please>
+                      </StyledLink>
+                    </PleaseHold>
                   )}
                 </Container>
               );
@@ -262,6 +274,12 @@ const ImgContainer = styled.div`
   margin-left: 490px;
   margin-bottom: -84px;
   bottom: 57px;
+  width: 58px;
+  border-radius: 20px;
+  &:hover {
+    background-color: white;
+    box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  }
 `;
 const Space = styled.div`
   padding-top: 122px;
@@ -281,5 +299,22 @@ const IconContainer = styled.div`
   justify-content: space-between;
   position: absolute;
   margin-top: 24px;
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+`;
+
+const PleaseHold = styled.div`
+  width: 100%;
+  height: 9%;
+  background-color: white;
+  border-radius: 8px;
+`;
+
+const Please = styled.div`
+  text-align: center;
+  font-size: 24px;
+  color: black;
 `;
 export default MainPage;

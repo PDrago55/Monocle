@@ -7,10 +7,8 @@ function AccountInfo() {
   const [articles, setArticle] = useState([]);
   localStorage.setItem("currentUser", user.signin);
   const email = localStorage.getItem("currentUser");
-  console.log(email);
   // let test2 = localStorage.getItem("article(s)");
   // console.log(savedArticle, "test", test, "test2", test2);
-  console.log(user.signin);
   useEffect(() => {
     fetch(`/myarticle/${user.signin}`)
       .then((res) => res.json())
@@ -28,7 +26,7 @@ function AccountInfo() {
           <ArticleWrapper>
             <h1>{article.title}</h1>
             <h2>Agency: {article.source.name}</h2>
-            <img src={article.image}></img>
+            <img src={article.image} width="300px" height="300px"></img>
             <h4>{article.description}</h4>
             <a className="link" href={article.url}>
               <div className="articleLink">For the full Article.</div>

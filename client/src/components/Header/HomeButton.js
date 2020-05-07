@@ -8,15 +8,21 @@ const HomeButton = () => {
       <Link to="/">
         <img
           src="/assets/pandamonocle.png"
+          className="test"
           alt="logo"
           width="80px"
           height="80px"
         ></img>
       </Link>
-      <div></div>
-      <div></div>
     </ImageContainer>
   );
 };
-const ImageContainer = styled.div``;
+const ImageContainer = styled.div`
+  .test {
+    &:hover {
+      transform: scale(1);
+      transform-origin: center;
+    }
+  }
+`;
 export default HomeButton;

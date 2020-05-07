@@ -8,6 +8,14 @@ export default createGlobalStyle`
 *,
 *:before,
 *:after {
-    font-family: 'News Cycle', sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6{
+    font-family: 'Oswald', sans-serif;
+}
+
+div, span, p, li, ul, ol {
+    font-family: 'Slabo 27px', serif;
 }
 `;

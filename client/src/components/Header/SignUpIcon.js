@@ -6,7 +6,7 @@ function SignUpIcon() {
     <>
       <StyledLink to="/user">
         <Box>
-          <h1>Sign In!</h1>
+          <div className="sign">Sign In!</div>
         </Box>
       </StyledLink>
     </>
@@ -19,12 +19,16 @@ const StyledLink = styled(Link)`
 `;
 const Box = styled.div`
   border: 1px solid black;
-  padding: 0px 10px;
   margin-right: 20px;
+  padding: 0px 8px;
+  border-radius: 5px;
   box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
   &: hover {
     color: white;
     opacity: 0.9;
+  }
+  .sign {
+    font-size: 32px;
   }
 `;
 export default SignUpIcon;

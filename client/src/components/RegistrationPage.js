@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 
 function RegistrationPage() {
@@ -7,7 +8,7 @@ function RegistrationPage() {
   const [passwordTwo, setPassordTwo] = useState("");
   const [name, setName] = useState("");
   const [leaning, setLeaning] = useState("");
-
+  const history = useHistory();
   return (
     <Bg>
       <RegisterTitle>Registration</RegisterTitle>
@@ -74,7 +75,10 @@ function RegistrationPage() {
                   }),
                 })
                   .then((res) => res.json())
-                  .then((data) => console.log(data));
+                  .then((data) => {
+                    console.log(data);
+                    history.push("/");
+                  });
               }}
             >
               Register

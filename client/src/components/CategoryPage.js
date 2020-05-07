@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import SearchBar from "./SearchBar";
 import NavBar from "./NavBar";
 import {
   requestArticlesByCategory,
@@ -43,19 +42,24 @@ function CategoryPage() {
               console.log(id);
               return (
                 <ArticleWrapper id={id} key={id}>
-                  <ArticleLink
-                    onClick={() => {
-                      dispatch(receiveLinkCategoryArticle(article));
-                    }}
-                    to={`/article/${article.title.split(" ").join("_")}`}
-                  >
-                    <div>News Agency: {article.source.name}</div>
-                    <ArticleImage src={article.urlToImage}></ArticleImage>
-                    <div>{article.title}</div>
-                    <div>Author: {article.author}</div>
-                    <div className="articleD">Article Description</div>
-                    <div>{article.description}</div>
-                  </ArticleLink>
+                  <div className="innerCard">
+                    <ArticleLink
+                      onClick={() => {
+                        dispatch(receiveLinkCategoryArticle(article));
+                      }}
+                      to={`/article/${article.title.split(" ").join("_")}`}
+                    >
+                      <div>
+                        <strong>News Agency:</strong> {article.source.name}
+                      </div>
+                      <ArticleImage src={article.urlToImage}></ArticleImage>
+                      <div>{article.title}</div>
+                      <div className="articleD">Author</div>
+                      <div>{article.author}</div>
+                      <div className="articleD">Article Description</div>
+                      <div>{article.description}</div>
+                    </ArticleLink>
+                  </div>
                 </ArticleWrapper>
               );
             })}
@@ -79,14 +83,22 @@ const ArticleLink = styled(Link)`
 `;
 
 const ArticleWrapper = styled.div`
-  padding: 36px;
+  padding: 12px;
   border-radius: 16px;
   box-shadow: 2px 5px 36px rgba(0, 0, 0, 0.1);
   text-align: center;
-
+  line-height: 1.5;
   &:hover {
     transform: scale(1.05);
     transform-origin: center;
+  }
+  .innerCard {
+    border: 1px solid black;
+    border-radius: 8px;
+    padding: 20px 5px;
+    background-color: rgb(222, 221, 220);
+    opacity: 0.9;
+    height: 100%;
   }
   .articleD {
     text-align: center;

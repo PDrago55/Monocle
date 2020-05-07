@@ -73,6 +73,7 @@ function SearchBar() {
         {matches.length > 0 ? (
           <ListWrapper>
             {Object.values(matches).map((article, index) => {
+              console.log("MATHCES", matches);
               let theSelection = selected === index;
               return (
                 <List
@@ -105,10 +106,7 @@ const Wrapper = styled.div`
 const Container = styled.div`
   width: 550px;
   background-color: white;
-  opacity: 0.9;
   height: 110px;
-  margin-top: 291px;
-  margin-left: 480px;
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -131,13 +129,16 @@ const Search = styled.input`
 const Button = styled.button`
   height: 45px;
   width: max-content;
-  background: #2b00d7;
+  background: #696969;
   border-radius: 4px;
   cursor: pointer;
   border: none;
   padding: 0px 20px;
   font-size: 18px;
   color: #fff;
+  &:hover {
+    color: black;
+  }
 `;
 const ListWrapper = styled.ul`
   text-decoration: none;
