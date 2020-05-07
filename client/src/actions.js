@@ -72,3 +72,18 @@ export const receiveSavedArticle = (saved) => ({
 export const receiveSavedArticleError = () => ({
   type: "RECEIVE_SAVED_ARTICLE_ERROR",
 });
+
+//-----------------Link Category to Main Page Issue -------//
+
+export const requestLinkCategoryArticle = () => ({
+  type: "REQUEST_LINK_CATEGORY_ARTICLE",
+});
+
+export const receiveLinkCategoryArticle = (link) => ({
+  type: "RECEIVE_LINK_CATEGORY_ARTICLE",
+  link,
+});
+
+export const receiveLinkCategoryArticleError = () => ({
+  type: "RECEIVE_LINK_CATEGORY_ARTICLE_ERROR",
+});

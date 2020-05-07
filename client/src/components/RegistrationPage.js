@@ -109,6 +109,7 @@ const Container = styled.div`
   height: 600px;
   background-color: #ffffff78;
   top: 50px;
+  border-radius: 7px;
   margin-left: 515px;
   .holder {
     display: flex;
@@ -124,6 +125,7 @@ const Container = styled.div`
     margin-bottom: 20px;
     text-align: center;
     font-size: 15px;
+    border-radius: 7px;
     width: 50%;
   }
   .email {
@@ -131,6 +133,7 @@ const Container = styled.div`
     margin-bottom: 20px;
     text-align: center;
     font-size: 15px;
+    border-radius: 7px;
     width: 50%;
   }
   .password {
@@ -138,6 +141,7 @@ const Container = styled.div`
     margin-bottom: 20px;
     text-align: center;
     font-size: 15px;
+    border-radius: 7px;
     width: 50%;
   }
   .password2 {
@@ -145,6 +149,7 @@ const Container = styled.div`
     margin-bottom: 20px;
     text-align: center;
     font-size: 15px;
+    border-radius: 7px;
     width: 50%;
   }
   .leaning {
@@ -152,6 +157,7 @@ const Container = styled.div`
     margin-bottom: 20px;
     text-align: center;
     font-size: 15px;
+    border-radius: 7px;
     width: 50%;
   }
   .button {
@@ -160,6 +166,9 @@ const Container = styled.div`
     font-size: 24px;
     border-radius: 12px;
     cursor: pointer;
+    &:hover {
+      color: white;
+    }
   }
 `;
 export default RegistrationPage;

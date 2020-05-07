@@ -5,34 +5,50 @@ function About() {
   return (
     <>
       <TitleContainer>
-        <h1>About Section and Methodology</h1>
+        <h1>About and Methodology</h1>
       </TitleContainer>
 
       <WhiteBackground></WhiteBackground>
       <GreyBox>
-        Hello
         <img src="/assets/pandamonocle.png" height="150px" width="150px"></img>
       </GreyBox>
       <BlackBg></BlackBg>
       <Methods>
-        In the Alpha Stage of this application, Monocle intends to offer users
-        the ability to search and consume news, appropriatly. By...
+        In the <strong>Alpha Stage</strong> of this application, Monocle intends
+        to offer users the ability to search and consume news,{" "}
+        <strong>appropriatly.</strong>
       </Methods>
       <WhiteBackground></WhiteBackground>
       <BlackBg></BlackBg>
       <CardContainer>
         <GreyCard>
-          <img src="/assets/people-opinion.png"></img>
+          <div className="bg">
+            <img
+              src="/assets/people-opinion.png"
+              alt="opinion"
+              className="img"
+            ></img>
+          </div>
         </GreyCard>
         <GreyCard>
-          <img src="/assets/user-input.png" height="200px" width="200px"></img>
+          <div className="bg">
+            <img
+              src="/assets/user-input.png"
+              alt="user"
+              height="200px"
+              width="200px"
+            ></img>
+          </div>
         </GreyCard>
         <GreyCard>
-          <img
-            src="/assets/content-analysis.png"
-            height="200px"
-            width="200px"
-          ></img>
+          <div className="bg">
+            <img
+              alt="content"
+              src="/assets/content-analysis.png"
+              height="200px"
+              width="200px"
+            ></img>
+          </div>
         </GreyCard>
       </CardContainer>
     </>
@@ -53,14 +69,12 @@ const WhiteBackground = styled.div`
 const GreyBox = styled.div`
   position: absolute;
   background-color: #c4c4c4;
-  width: 430px;
-  height: 200px;
+  width: 330px;
   top: 300px;
   left: 500px;
-  font-size: 36px;
-  line-height: 42px;
   text-align: center;
-  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  padding: 5px;
 `;
 const BlackBg = styled.div`
   background-color: black;
@@ -79,21 +93,39 @@ const Methods = styled.div`
   font-size: 36px;
   line-height: 42px;
   text-align: center;
+  padding: 15px 8px;
+  border-radius: 15px;
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
 `;
 
 const CardContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin: 0px 15px;
 `;
 
 const GreyCard = styled.div`
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 275px;
   height: 315px;
   background-color: #c4c4c4;
   border-radius: 15px;
   box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
   top: -300px;
+  &:hover {
+    transform: scale(1.05);
+    transform-origin: center;
+  }
+  .bg {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    background-color: white;
+    border-radius: 15px;
+  }
 `;
 export default About;

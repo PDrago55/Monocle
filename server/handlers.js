@@ -102,11 +102,12 @@ const getMyArticle = (req, res) => {
   let refreshedTitle = title.split("_").join(" ").toLowerCase();
   newsapi.v2
     .everything({
-      q: refreshedTitle,
       qInTitle: refreshedTitle,
       language: "en",
     })
-    .then((data) => res.json({ article: data.articles }));
+    .then((data) => {
+      res.json({ article: data.articles });
+    });
 };
 
 //-------------Category Endpoint--------------------//
@@ -129,7 +130,9 @@ const handleCategories = (req, res) => {
       country: "us",
       pageSize: 10,
     })
-    .then((data) => res.json(data));
+    .then((data) => {
+      res.json(data);
+    });
 };
 
 module.exports = {

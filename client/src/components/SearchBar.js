@@ -133,6 +133,7 @@ const Button = styled.button`
   width: max-content;
   background: #2b00d7;
   border-radius: 4px;
+  cursor: pointer;
   border: none;
   padding: 0px 20px;
   font-size: 18px;

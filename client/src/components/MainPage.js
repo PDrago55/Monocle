@@ -23,7 +23,11 @@ function MainPage() {
   const state = useSelector((state) => state.article.status);
   const isOn = useSelector((state) => state.user.isSignedIn);
   const article = useParams();
+  const categoryLink = useSelector((state) => state.link.link);
+  const email = useSelector((state) => state.user.user);
+  console.log("Category article", categoryLink);
   useEffect(() => {
+    console.log(article.title);
     dispatch(requestArticle());
     fetch(`/articles/${article.title}`)
       .then((res) => res.json())
@@ -34,8 +38,6 @@ function MainPage() {
         dispatch(receiveArticleError(error));
       });
   }, []);
-  // console.log(myArticle);
-  // console.log("here", article.title.split("-").join(" "));
 
   const handleSavedArticle = (article) => {
     fetch("/savedarticle", {
@@ -45,6 +47,7 @@ function MainPage() {
       },
       body: JSON.stringify({
         article,
+        email: email.signin,
       }),
     })
       .then((res) => res.json())
@@ -53,10 +56,70 @@ function MainPage() {
         console.log(err);
       });
   };
+  console.log(myArticle);
   return (
     <Balance>
       {state === "loading" ? (
         <LinearProgress />
+      ) : myArticle.length === 0 ? (
+        <>
+          <NavBar />
+          <Space></Space>
+          <ArticleCard>
+            <ImgContainer>
+              <img src="/assets/info.png" height="60px" width="60px"></img>
+            </ImgContainer>
+            {Object.values(categoryLink).map((item) => {
+              return (
+                <Container>
+                  <h2 className="title">{item.title}</h2>
+                  <img
+                    className="img"
+                    src={item.urlToImage}
+                    width="200px"
+                    height="200px"
+                  ></img>
+                  <div className="author">By: {item.author}</div>
+                  <a href={item.url} className="test">
+                    <div className="mediaOrg">Media Site:</div>
+                  </a>
+                  <div className="rating">User Rating</div>
+                  <div className="wordContainer">
+                    <div>Agree</div>
+                    <div>Disagree</div>
+                  </div>
+                  {isOn ? (
+                    <div className="IconContainer">
+                      <Icon
+                        className="up"
+                        onClick={() => console.log("UPVOTE")}
+                        icon={circle_up}
+                        size={45}
+                      ></Icon>
+                      <Icon
+                        className="heart"
+                        icon={heart}
+                        size={45}
+                        onClick={() => {
+                          handleSavedArticle(item);
+                          dispatch(receiveSavedArticle(item));
+                        }}
+                      ></Icon>
+                      <Icon
+                        className="down"
+                        onClick={() => console.log("DownVOTE")}
+                        icon={circle_down}
+                        size={45}
+                      ></Icon>
+                    </div>
+                  ) : (
+                    <div> Please Sign in to use these Features</div>
+                  )}
+                </Container>
+              );
+            })}
+          </ArticleCard>
+        </>
       ) : (
         <>
           <NavBar />
@@ -66,59 +129,56 @@ function MainPage() {
               <img src="/assets/info.png" height="60px" width="60px"></img>
             </ImgContainer>
             {myArticle.map((item) => {
-              if (item.title === article.title.split("_").join(" ")) {
-                return (
-                  <Container>
-                    <h2 className="title">{item.title}</h2>
-                    <img
-                      className="img"
-                      src={item.urlToImage}
-                      width="200px"
-                      height="200px"
-                    ></img>
-                    <div className="author">By: {item.author}</div>
-                    <a href={item.url} className="test">
-                      <div className="mediaOrg">
-                        Media Site: {item.source.name}
-                      </div>
-                    </a>
-                    <div className="rating">User Rating</div>
-                    <div className="wordContainer">
-                      <div>Agree</div>
-                      <div>Disagree</div>
+              console.log("ITEMArticle", item);
+              return (
+                <Container>
+                  <h2 className="title">{item.title}</h2>
+                  <img
+                    className="img"
+                    src={item.urlToImage}
+                    width="200px"
+                    height="200px"
+                  ></img>
+                  <div className="author">By: {item.author}</div>
+                  <a href={item.url} className="test">
+                    <div className="mediaOrg">
+                      Media Site: {item.source.name}
                     </div>
-                    {isOn ? (
-                      <div className="IconContainer">
-                        <form>
-                          <Icon
-                            className="up"
-                            onClick={() => console.log("UPVOTE")}
-                            icon={circle_up}
-                            size={45}
-                          ></Icon>
-                          <Icon
-                            className="heart"
-                            icon={heart}
-                            size={45}
-                            onClick={() => {
-                              handleSavedArticle(item);
-                              dispatch(receiveSavedArticle(item));
-                            }}
-                          ></Icon>
-                          <Icon
-                            className="down"
-                            onClick={() => console.log("DownVOTE")}
-                            icon={circle_down}
-                            size={45}
-                          ></Icon>
-                        </form>
-                      </div>
-                    ) : (
-                      <div> Please Sign in to use these Features</div>
-                    )}
-                  </Container>
-                );
-              }
+                  </a>
+                  <div className="rating">User Rating</div>
+                  <div className="wordContainer">
+                    <div>Agree</div>
+                    <div>Disagree</div>
+                  </div>
+                  {isOn ? (
+                    <div className="IconContainer">
+                      <Icon
+                        className="up"
+                        onClick={() => console.log("UPVOTE")}
+                        icon={circle_up}
+                        size={45}
+                      ></Icon>
+                      <Icon
+                        className="heart"
+                        icon={heart}
+                        size={45}
+                        onClick={() => {
+                          handleSavedArticle(item);
+                          dispatch(receiveSavedArticle(item));
+                        }}
+                      ></Icon>
+                      <Icon
+                        className="down"
+                        onClick={() => console.log("DownVOTE")}
+                        icon={circle_down}
+                        size={45}
+                      ></Icon>
+                    </div>
+                  ) : (
+                    <div> Please Sign in to use these Features</div>
+                  )}
+                </Container>
+              );
             })}
           </ArticleCard>
         </>

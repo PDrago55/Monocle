@@ -9,6 +9,7 @@ import {
   requestArticlesByCategory,
   receiveArticlesByCategory,
   receiveArticlesByCategoryError,
+  receiveLinkCategoryArticle,
 } from "../actions";
 import { LinearProgress } from "@material-ui/core";
 
@@ -23,6 +24,7 @@ function CategoryPage() {
       .then((res) => res.json())
       .then((data) => {
         dispatch(receiveArticlesByCategory(data.articles));
+        console.log(data.articles);
       })
       .catch((err) => {
         dispatch(receiveArticlesByCategoryError(err));
@@ -37,10 +39,14 @@ function CategoryPage() {
           <NavBar />
           <h1>{`Headlines from ${category.toUpperCase()}`}</h1>
           <CategoryWrapper>
-            {categoryArticles.map((article) => {
+            {categoryArticles.map((article, id) => {
+              console.log(id);
               return (
-                <ArticleWrapper>
+                <ArticleWrapper id={id} key={id}>
                   <ArticleLink
+                    onClick={() => {
+                      dispatch(receiveLinkCategoryArticle(article));
+                    }}
                     to={`/article/${article.title.split(" ").join("_")}`}
                   >
                     <div>News Agency: {article.source.name}</div>
