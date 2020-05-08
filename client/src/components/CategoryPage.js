@@ -23,7 +23,6 @@ function CategoryPage() {
       .then((res) => res.json())
       .then((data) => {
         dispatch(receiveArticlesByCategory(data.articles));
-        console.log(data.articles);
       })
       .catch((err) => {
         dispatch(receiveArticlesByCategoryError(err));
@@ -39,7 +38,6 @@ function CategoryPage() {
           <h1>{`Headlines from ${category.toUpperCase()}`}</h1>
           <CategoryWrapper>
             {categoryArticles.map((article, id) => {
-              console.log(id);
               return (
                 <ArticleWrapper id={id} key={id}>
                   <div className="innerCard">

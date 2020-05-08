@@ -100,6 +100,7 @@ const handleTitles = async (req, res) => {
 const getMyArticle = (req, res) => {
   const { title } = req.params;
   let refreshedTitle = title.split("_").join(" ").toLowerCase();
+  refreshedTitle = refreshedTitle.replace("%", " percent");
   newsapi.v2
     .everything({
       qInTitle: refreshedTitle,

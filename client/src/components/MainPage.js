@@ -25,9 +25,7 @@ function MainPage() {
   const article = useParams();
   const categoryLink = useSelector((state) => state.link.link);
   const email = useSelector((state) => state.user.user);
-  console.log("Category article", categoryLink);
   useEffect(() => {
-    console.log(article.title);
     dispatch(requestArticle());
     fetch(`/articles/${article.title}`)
       .then((res) => res.json())
@@ -56,7 +54,6 @@ function MainPage() {
         console.log(err);
       });
   };
-  console.log(myArticle);
   return (
     <Balance>
       {state === "loading" ? (
@@ -137,7 +134,6 @@ function MainPage() {
               </Link>
             </ImgContainer>
             {myArticle.map((item) => {
-              console.log("ITEMArticle", item);
               return (
                 <Container>
                   <h2 className="title">{item.title}</h2>

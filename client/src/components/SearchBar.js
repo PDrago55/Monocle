@@ -30,7 +30,6 @@ function SearchBar() {
   });
 
   const handleValue = (event) => {
-    console.log(event);
     // event.preventDefault();
     setValue(event);
   };
@@ -73,7 +72,6 @@ function SearchBar() {
         {matches.length > 0 ? (
           <ListWrapper>
             {Object.values(matches).map((article, index) => {
-              console.log("MATHCES", matches);
               let theSelection = selected === index;
               return (
                 <List

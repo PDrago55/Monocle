@@ -13,11 +13,9 @@ function AccountInfo() {
     fetch(`/myarticle/${user.signin}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.article);
         setArticle(data.article);
       });
   }, []);
-  console.log("ARTICLE?", articles);
   return (
     <>
       <Head>Saved Articles</Head>
