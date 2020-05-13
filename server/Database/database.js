@@ -9,7 +9,7 @@ const mainDatabase = async (req, res) => {
   console.log("connected database");
   const db = await client.db("monocleDb");
   await db.collection("test").insertOne({ test: "test" });
-  // await client.close();
+  await client.close();
   // console.log("closed");
 };
 mainDatabase();

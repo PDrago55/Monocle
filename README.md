@@ -1,68 +1,100 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Monocle Alpha Stage Project
 
-## Available Scripts
+Welcome to Monocle! This application is a user based rating site for news articles.
+The purpose of the alpha stage site is to provide users with the ability to see, compare and rate news articles that get published daily.
 
-In the project directory, you can run:
+---
 
-### `yarn start`
+### Landing Page
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<img src="client/public/assets/landingpage.png" alt="landingpage" />
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+The landing Page of the site is purposefully black, white and gray in color to emulate the nature of reviewing and reading news. There is always a _gray area_. The user can then search for news articles (over 73 000) using the search bar (search bar can only read titles.. for now).
 
-### `yarn test`
+---
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Main Page
 
-### `yarn build`
+<img src="client/public/assets/nonsigninmain.png" alt="nonsigninmain">
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+After searching for an article title, the user will be borught to this page, where they can view the article they searched up as well as a nav bar with categories.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+As seen here, the user Rating section is barred by a sign-in requirement. Users must sign-in or create and account to use these features.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `yarn eject`
+### Category Page
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+<img src="client/public/assets/categorypage.png">
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The category page includes the TOP headlines from various news agencies. It meant to offer quick brush ups on daily news but also add insight as to what certain news agencies consider "Headline News".
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+---
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Sign-in Page
 
-## Learn More
+<img src="client/public/assets/signindetails.png">
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The user can reach this page by clicking on the _Sign-In!_ icon in the header section. Once there, the user can either sign in or register a new account to gain access to the extra features on the site.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+### Registraion Page
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+<img src="client/public/assets/regsitration.png">
 
-### Analyzing the Bundle Size
+The Registration page asks simple questions and stores the user in a Mongo Database. On completion, the DB creates an empty array called _Articles_. This stores saved articles in the users Profile Page.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+---
 
-### Making a Progressive Web App
+### Signed-In Features
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+<img src="client/public/assets/signinmain.png">
 
-### Advanced Configuration
+Once signed in, users can like, agree or disagree with news articles with other users.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+---
 
-### Deployment
+### Saved Articles
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+Users can save their favourite news articles and review them later. Saved articles get stored in the DB.
 
-### `yarn build` fails to minify
+<img src="client/public/assets/savedarticle.png">
+<img src="client/public/assets/saved.png">
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+UI design is "work-in-progress" but the goal is to expand news articles to larger size for readability.
+
+---
+
+**_NEWS ARTICLE CONTENT IS NOT YET MADE AVAILABLE_**
+
+---
+
+## Future Updates will follow :).
+
+---
+
+### Long-Term Goals
+
+1. Create a verison of this App were we (the admins) provide a content-analysis of the news articles. Ratings will be based on _Frame Analysis_, _Expert Reference_ and _Emotional Impact of Articles_ and _Political Leaning_. The goal is to provide both public user accounts and opinions of articles with a healthy backing of ruggid _Academic Content Analysis_.
+
+2. Extend and update the Sign-up requirements to include questions surrounding _Socioeconomic Status of Users_, _Education Level_, _Recent Voting Pattern_, and finally, _Favourite News Agencies_. The goal is to solidify our understanding of our users with regards biases in the consumption of _News_.
+
+3. Create an _Education Registration_ form to allow academia to use our data collected by the App. Data includes: _User Rated Opinion_, _Contentious Article Discussions By Users_, _Refined User Data with Voting Pattern (who's rating "what" and "how")_, etc.
+
+4. Add more information and features around the _Profile Page_. It would be nice to have _Account Information_ stored on a separate section to allow users to see their registration information and even allow users to change some aspects of their information (political leaning, etc) during their time on the app.
+
+---
+
+## Stretch
+
+1. Switch the Back-end from Node to Python or Java.
+
+2. Add a friends list.
+
+---
+
+---
+
+NEWS ARTICLES PROVIDED BY <a href="https://newsapi.org/">
+**_NEWS API_** </a>
